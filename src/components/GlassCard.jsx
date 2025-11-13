@@ -1,21 +1,22 @@
-const GlassCard = ({ children, ...props }) => {
+import React from 'react';
+
+const GlassCard = ({ children, className = "", style = {}, ...props }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
+    <div
       style={{
         backgroundColor: 'white',
         borderRadius: '0.5rem',
-        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
         border: '1px solid #e5e7eb',
         padding: '1.5rem',
-        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+        position: 'relative',
+        ...style
       }}
       {...props}
     >
       {children}
-    </motion.div>
+    </div>
   );
 };
 

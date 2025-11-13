@@ -30,6 +30,7 @@ const Services = () => {
           fontSize: '1.5rem', 
           fontWeight: '700', 
           color: '#111827',
+          margin: 0,
           fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
         }}>
           Service Records

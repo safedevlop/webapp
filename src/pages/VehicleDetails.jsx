@@ -1,5 +1,6 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from 'recharts';
+import { ArrowLeft, Calendar, Gauge, Wrench, AlertTriangle } from 'lucide-react';
 import GlassCard from '../components/GlassCard';
 import { vehicles } from '../data/vehicles';
 import { services } from '../data/services';
@@ -19,52 +20,193 @@ const VehicleDetails = () => {
   ];
 
   if (!vehicle) {
-    return <div className="text-white">Vehicle not found</div>;
+    return (
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '50vh',
+        color: '#374151',
+        fontSize: '1.125rem'
+      }}>
+        Vehicle not found
+      </div>
+    );
   }
 
-  const getStatusColor = (status) => {
+  const getStatusStyle = (status) => {
     switch (status) {
-      case 'Active': return 'bg-green-500/20 text-green-400 border-green-500/30';
-      case 'In Service': return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30';
-      case 'Maintenance': return 'bg-red-500/20 text-red-400 border-red-500/30';
-      default: return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
+      case 'Active': 
+        return { backgroundColor: '#dcfce7', color: '#166534', border: '1px solid #bbf7d0' };
+      case 'In Service': 
+        return { backgroundColor: '#fef3c7', color: '#92400e', border: '1px solid #fde68a' };
+      case 'Maintenance': 
+        return { backgroundColor: '#fee2e2', color: '#dc2626', border: '1px solid #fecaca' };
+      default: 
+        return { backgroundColor: '#f3f4f6', color: '#374151', border: '1px solid #d1d5db' };
     }
   };
 
   return (
-    <div className="space-y-6">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
+        <Link 
+          to="/vehicles" 
+          style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '0.5rem',
+            color: '#2563eb',
+            textDecoration: 'none',
+            fontSize: '0.875rem',
+            fontWeight: '500'
+          }}
+        >
+          <ArrowLeft size={16} />
+          Back to Vehicles
+        </Link>
+      </div>
+
       <GlassCard>
-        <div className="flex flex-col md:flex-row gap-6">
-          <div className="w-full md:w-1/3">
-            <img 
-              src={vehicle.image} 
-              alt={vehicle.model}
-              className="w-full h-48 object-cover rounded-lg"
-            />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <h1 style={{ 
+              fontSize: '1.875rem', 
+              fontWeight: '700', 
+              color: '#111827',
+              margin: 0
+            }}>
+              {vehicle.model}
+            </h1>
+            <span style={{
+              padding: '0.5rem 1rem',
+              borderRadius: '9999px',
+              fontSize: '0.875rem',
+              fontWeight: '500',
+              ...getStatusStyle(vehicle.status)
+            }}>
+              {vehicle.status}
+            </span>
           </div>
-          <div className="flex-1 space-y-4">
-            <div className="flex justify-between items-start">
-              <h1 className="text-2xl font-bold text-white">{vehicle.model}</h1>
-              <span className={`px-3 py-1 rounded-full text-sm border ${getStatusColor(vehicle.status)}`}>
-                {vehicle.status}
-              </span>
+          
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
+            gap: '1.5rem' 
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <div style={{ 
+                padding: '0.5rem', 
+                borderRadius: '0.5rem', 
+                backgroundColor: '#dbeafe' 
+              }}>
+                <Gauge size={20} style={{ color: '#2563eb' }} />
+              </div>
+              <div>
+                <p style={{ 
+                  fontSize: '0.75rem', 
+                  color: '#6b7280', 
+                  margin: 0,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em'
+                }}>
+                  Vehicle ID
+                </p>
+                <p style={{ 
+                  fontSize: '1rem', 
+                  fontWeight: '600', 
+                  color: '#111827',
+                  margin: 0
+                }}>
+                  #{vehicle.id.toString().padStart(4, '0')}
+                </p>
+              </div>
             </div>
-            <div className="grid grid-cols-2 gap-4 text-[#E0E1DD]">
-              <div>
-                <p className="text-sm opacity-70">Vehicle ID</p>
-                <p className="font-medium">#{vehicle.id}</p>
+            
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <div style={{ 
+                padding: '0.5rem', 
+                borderRadius: '0.5rem', 
+                backgroundColor: '#dbeafe' 
+              }}>
+                <Gauge size={20} style={{ color: '#2563eb' }} />
               </div>
               <div>
-                <p className="text-sm opacity-70">Mileage</p>
-                <p className="font-medium">{vehicle.mileage.toLocaleString()} km</p>
+                <p style={{ 
+                  fontSize: '0.75rem', 
+                  color: '#6b7280', 
+                  margin: 0,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em'
+                }}>
+                  Total Mileage
+                </p>
+                <p style={{ 
+                  fontSize: '1rem', 
+                  fontWeight: '600', 
+                  color: '#111827',
+                  margin: 0
+                }}>
+                  {vehicle.mileage.toLocaleString()} km
+                </p>
+              </div>
+            </div>
+            
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <div style={{ 
+                padding: '0.5rem', 
+                borderRadius: '0.5rem', 
+                backgroundColor: '#dcfce7' 
+              }}>
+                <Calendar size={20} style={{ color: '#16a34a' }} />
               </div>
               <div>
-                <p className="text-sm opacity-70">Last Service</p>
-                <p className="font-medium">{vehicle.lastService}</p>
+                <p style={{ 
+                  fontSize: '0.75rem', 
+                  color: '#6b7280', 
+                  margin: 0,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em'
+                }}>
+                  Last Service
+                </p>
+                <p style={{ 
+                  fontSize: '1rem', 
+                  fontWeight: '600', 
+                  color: '#111827',
+                  margin: 0
+                }}>
+                  {vehicle.lastService}
+                </p>
+              </div>
+            </div>
+            
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <div style={{ 
+                padding: '0.5rem', 
+                borderRadius: '0.5rem', 
+                backgroundColor: '#fef3c7' 
+              }}>
+                <AlertTriangle size={20} style={{ color: '#d97706' }} />
               </div>
               <div>
-                <p className="text-sm opacity-70">Next Service</p>
-                <p className="font-medium">{vehicle.nextService}</p>
+                <p style={{ 
+                  fontSize: '0.75rem', 
+                  color: '#6b7280', 
+                  margin: 0,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.05em'
+                }}>
+                  Next Service
+                </p>
+                <p style={{ 
+                  fontSize: '1rem', 
+                  fontWeight: '600', 
+                  color: '#111827',
+                  margin: 0
+                }}>
+                  {vehicle.nextService}
+                </p>
               </div>
             </div>
           </div>
@@ -72,31 +214,104 @@ const VehicleDetails = () => {
       </GlassCard>
 
       <GlassCard>
-        <h3 className="text-lg font-semibold text-white mb-4">Engine Temperature (24h)</h3>
+        <h3 style={{ 
+          fontSize: '1.125rem', 
+          fontWeight: '600', 
+          color: '#111827', 
+          marginBottom: '1rem',
+          margin: 0
+        }}>
+          Engine Temperature (24h)
+        </h3>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={temperatureData}>
-            <XAxis dataKey="time" stroke="#E0E1DD" />
-            <YAxis stroke="#E0E1DD" />
-            <Line type="monotone" dataKey="temp" stroke="#00A8E8" strokeWidth={2} />
+            <XAxis dataKey="time" stroke="#374151" />
+            <YAxis stroke="#374151" />
+            <Line type="monotone" dataKey="temp" stroke="#2563eb" strokeWidth={2} />
           </LineChart>
         </ResponsiveContainer>
       </GlassCard>
 
       <GlassCard>
-        <h3 className="text-lg font-semibold text-white mb-4">Service History</h3>
-        <div className="space-y-3">
-          {vehicleServices.map(service => (
-            <div key={service.id} className="flex justify-between items-center p-3 bg-white/5 rounded-lg">
-              <div>
-                <p className="text-white font-medium">{service.type}</p>
-                <p className="text-[#E0E1DD]/70 text-sm">{service.date} • {service.mechanic}</p>
+        <h3 style={{ 
+          fontSize: '1.125rem', 
+          fontWeight: '600', 
+          color: '#111827', 
+          marginBottom: '1rem',
+          margin: 0
+        }}>
+          Service History
+        </h3>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '1rem' }}>
+          {vehicleServices.length > 0 ? (
+            vehicleServices.map(service => (
+              <div 
+                key={service.id} 
+                style={{ 
+                  display: 'flex', 
+                  justifyContent: 'space-between', 
+                  alignItems: 'center', 
+                  padding: '1rem',
+                  backgroundColor: '#f8fafc',
+                  borderRadius: '0.5rem',
+                  border: '1px solid #e2e8f0'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <div style={{ 
+                    padding: '0.5rem', 
+                    borderRadius: '0.5rem', 
+                    backgroundColor: '#dbeafe' 
+                  }}>
+                    <Wrench size={16} style={{ color: '#2563eb' }} />
+                  </div>
+                  <div>
+                    <p style={{ 
+                      fontSize: '0.875rem', 
+                      fontWeight: '500', 
+                      color: '#111827',
+                      margin: 0
+                    }}>
+                      {service.type}
+                    </p>
+                    <p style={{ 
+                      fontSize: '0.75rem', 
+                      color: '#6b7280',
+                      margin: 0
+                    }}>
+                      {service.date} • {service.mechanic}
+                    </p>
+                  </div>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <p style={{ 
+                    fontSize: '0.875rem', 
+                    fontWeight: '600', 
+                    color: '#111827',
+                    margin: 0
+                  }}>
+                    ${service.cost}
+                  </p>
+                  <p style={{ 
+                    fontSize: '0.75rem', 
+                    color: '#16a34a',
+                    margin: 0
+                  }}>
+                    {service.status}
+                  </p>
+                </div>
               </div>
-              <div className="text-right">
-                <p className="text-white font-medium">${service.cost}</p>
-                <p className="text-[#E0E1DD]/70 text-sm">{service.status}</p>
-              </div>
+            ))
+          ) : (
+            <div style={{ 
+              textAlign: 'center', 
+              padding: '2rem',
+              color: '#6b7280',
+              fontSize: '0.875rem'
+            }}>
+              No service history available for this vehicle.
             </div>
-          ))}
+          )}
         </div>
       </GlassCard>
     </div>

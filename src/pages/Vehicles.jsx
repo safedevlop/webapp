@@ -109,7 +109,8 @@ const Vehicles = () => {
                   <h3 style={{ 
                     fontSize: '1.125rem', 
                     fontWeight: '600', 
-                    color: '#111827' 
+                    color: '#111827',
+                    margin: 0
                   }}>
                     {vehicle.model}
                   </h3>
@@ -124,13 +125,13 @@ const Vehicles = () => {
                   </span>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  <p style={{ fontSize: '0.875rem', color: '#374151' }}>
+                  <p style={{ fontSize: '0.875rem', color: '#374151', margin: 0 }}>
                     Mileage: {vehicle.mileage.toLocaleString()} km
                   </p>
-                  <p style={{ fontSize: '0.875rem', color: '#374151' }}>
+                  <p style={{ fontSize: '0.875rem', color: '#374151', margin: 0 }}>
                     Last Service: {vehicle.lastService}
                   </p>
-                  <p style={{ fontSize: '0.875rem', color: '#374151' }}>
+                  <p style={{ fontSize: '0.875rem', color: '#374151', margin: 0 }}>
                     Next Service: {vehicle.nextService}
                   </p>
                 </div>

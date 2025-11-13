@@ -1,0 +1,157 @@
+/* Layout Styles */
+
+/* Dashboard Layout */
+.dashboard-layout {
+  min-height: 100vh;
+  background-color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.main-content {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+/* Grid Layouts */
+.grid-auto-fit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.grid-auto-fit-lg {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.5rem;
+}
+
+.grid-auto-fit-sm {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Flex Layouts */
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-gap-sm {
+  gap: 0.5rem;
+}
+
+.flex-gap-md {
+  gap: 1rem;
+}
+
+.flex-gap-lg {
+  gap: 1.5rem;
+}
+
+/* Spacing */
+.space-y-sm > * + * {
+  margin-top: 0.5rem;
+}
+
+.space-y-md > * + * {
+  margin-top: 1rem;
+}
+
+.space-y-lg > * + * {
+  margin-top: 1.5rem;
+}
+
+/* Typography */
+.heading-xl {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.heading-lg {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1rem;
+}
+
+.text-primary {
+  color: #111827;
+}
+
+.text-secondary {
+  color: #374151;
+}
+
+.text-muted {
+  color: #6b7280;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+/* Tables */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  color: #374151;
+  font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table td {
+  padding: 0.75rem 1rem;
+  color: #111827;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.table tr:hover {
+  background-color: #f9fafb;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main-content {
+    padding: 1rem;
+  }
+  
+  .grid-auto-fit {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-auto-fit-lg {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-auto-fit-sm {
+    grid-template-columns: 1fr;
+  }
+}

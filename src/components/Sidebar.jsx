@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { LayoutDashboard, Car, Wrench, AlertTriangle, Settings, Bell, User } from 'lucide-react';
 
-const Navbar = () => {
+const Sidebar = () => {
   const navItems = [
     { path: '/', icon: LayoutDashboard, label: 'Dashboard' },
     { path: '/vehicles', icon: Car, label: 'Vehicles' },
@@ -12,41 +12,88 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="fixed top-4 left-4 right-4 z-50">
-      <nav className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl">
-        <div className="flex items-center justify-between h-16 px-6">
-          <div className="flex items-center space-x-8">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-[#00A8E8] rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">FM</span>
+    <div style={{ 
+      position: 'fixed', 
+      top: '1rem', 
+      left: '1rem', 
+      right: '1rem', 
+      zIndex: 50 
+    }}>
+      <nav style={{ 
+        backgroundColor: 'rgba(255, 255, 255, 0.1)', 
+        backdropFilter: 'blur(16px)', 
+        border: '1px solid rgba(255, 255, 255, 0.2)', 
+        borderRadius: '1rem', 
+        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)' 
+      }}>
+        <div style={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'space-between', 
+          height: '4rem', 
+          padding: '0 1.5rem' 
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <div style={{ 
+                width: '2rem', 
+                height: '2rem', 
+                backgroundColor: '#00A8E8', 
+                borderRadius: '0.5rem', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center' 
+              }}>
+                <span style={{ color: 'white', fontWeight: 'bold', fontSize: '0.875rem' }}>FM</span>
               </div>
-              <span className="text-white font-bold text-xl">Fleet Monitor</span>
+              <span style={{ color: 'white', fontWeight: 'bold', fontSize: '1.25rem' }}>Fleet Monitor</span>
             </div>
-            <div className="hidden md:flex items-center space-x-2">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               {navItems.map(({ path, icon, label }) => (
                 <NavLink
                   key={path}
                   to={path}
-                  className={({ isActive }) =>
-                    `flex items-center space-x-2 px-4 py-2 rounded-xl transition-all duration-200 ${
-                      isActive
-                        ? 'bg-[#00A8E8]/20 text-[#00A8E8] shadow-lg'
-                        : 'text-[#E0E1DD]/80 hover:bg-white/10 hover:text-[#E0E1DD]'
-                    }`
-                  }
+                  style={({ isActive }) => ({
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    padding: '0.5rem 1rem',
+                    borderRadius: '0.75rem',
+                    transition: 'all 0.2s',
+                    backgroundColor: isActive ? 'rgba(0, 168, 232, 0.2)' : 'transparent',
+                    color: isActive ? '#00A8E8' : 'rgba(224, 225, 221, 0.8)',
+                    textDecoration: 'none',
+                    boxShadow: isActive ? '0 10px 15px -3px rgba(0, 0, 0, 0.1)' : 'none'
+                  })}
                 >
                   {React.createElement(icon, { size: 18 })}
-                  <span className="text-sm font-medium">{label}</span>
+                  <span style={{ fontSize: '0.875rem', fontWeight: '500' }}>{label}</span>
                 </NavLink>
               ))}
             </div>
           </div>
-          <div className="flex items-center space-x-3">
-            <button className="p-2 rounded-xl bg-white/10 hover:bg-white/20 transition-all duration-200 hover:shadow-lg">
-              <Bell size={18} className="text-[#E0E1DD]" />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <button style={{ 
+              padding: '0.5rem', 
+              borderRadius: '0.75rem', 
+              backgroundColor: 'rgba(255, 255, 255, 0.1)', 
+              border: 'none',
+              color: '#E0E1DD',
+              cursor: 'pointer',
+              transition: 'all 0.2s'
+            }}>
+              <Bell size={18} />
             </button>
-            <button className="p-2 rounded-xl bg-white/10 hover:bg-white/20 transition-all duration-200 hover:shadow-lg">
-              <User size={18} className="text-[#E0E1DD]" />
+            <button style={{ 
+              padding: '0.5rem', 
+              borderRadius: '0.75rem', 
+              backgroundColor: 'rgba(255, 255, 255, 0.1)', 
+              border: 'none',
+              color: '#E0E1DD',
+              cursor: 'pointer',
+              transition: 'all 0.2s'
+            }}>
+              <User size={18} />
             </button>
           </div>
         </div>
@@ -55,4 +102,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Sidebar;

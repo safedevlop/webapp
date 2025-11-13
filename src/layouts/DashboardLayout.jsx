@@ -4,12 +4,6 @@ import { NavLink } from 'react-router-dom';
 import { LayoutDashboard, Car, Wrench, AlertTriangle, Settings, Bell, User } from 'lucide-react';
 
 const DashboardLayout = () => {
-  // Professional font styles
-  const fontStyles = {
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-    fontWeight: '400',
-    letterSpacing: '-0.01em'
-  };
   const navItems = [
     { path: '/', icon: LayoutDashboard, label: 'Dashboard' },
     { path: '/vehicles', icon: Car, label: 'Vehicles' },
@@ -22,9 +16,10 @@ const DashboardLayout = () => {
     <div style={{ 
       minHeight: '100vh', 
       backgroundColor: '#f8fafc',
-      ...fontStyles
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+      fontWeight: '400',
+      letterSpacing: '-0.01em'
     }}>
-      {/* Navigation Bar */}
       <nav style={{ 
         backgroundColor: '#1e40af', 
         boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
@@ -41,7 +36,6 @@ const DashboardLayout = () => {
           alignItems: 'center',
           height: '4rem'
         }}>
-          {/* Logo and Brand */}
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', marginRight: '2.5rem' }}>
               <div style={{ 
@@ -59,14 +53,12 @@ const DashboardLayout = () => {
               <span style={{ 
                 fontSize: '1.25rem', 
                 fontWeight: '600', 
-                color: 'white',
-                ...fontStyles
+                color: 'white'
               }}>
                 Fleet Monitor
               </span>
             </div>
             
-            {/* Navigation Links */}
             <div style={{ display: 'flex', gap: '2rem' }}>
               {navItems.map(({ path, icon, label }) => (
                 <NavLink
@@ -80,7 +72,6 @@ const DashboardLayout = () => {
                     borderRadius: '0.375rem',
                     fontSize: '0.875rem',
                     fontWeight: '500',
-                    ...fontStyles,
                     textDecoration: 'none',
                     transition: 'all 0.2s',
                     backgroundColor: isActive ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
@@ -95,7 +86,6 @@ const DashboardLayout = () => {
             </div>
           </div>
 
-          {/* User Actions */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <button style={{ 
               padding: '0.5rem', 
@@ -123,7 +113,6 @@ const DashboardLayout = () => {
         </div>
       </nav>
 
-      {/* Main Content */}
       <main style={{ 
         maxWidth: '80rem', 
         margin: '0 auto', 

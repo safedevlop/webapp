@@ -7,6 +7,7 @@ const Settings = () => {
         fontSize: '1.5rem', 
         fontWeight: '700', 
         color: '#111827',
+        margin: 0,
         fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
       }}>
         Settings
@@ -14,6 +15,7 @@ const Settings = () => {
       <GlassCard>
         <p style={{ 
           color: '#374151',
+          margin: 0,
           fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
         }}>
           Settings page coming soon...

@@ -1,4 +1,4 @@
-/* Fleet Monitor App - Main Styles */
+/* Fleet Monitor App - Global Styles */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +10,11 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+/* Professional font styles */
+.font-system {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }

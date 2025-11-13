@@ -28,6 +28,7 @@ const Alerts = () => {
         fontSize: '1.5rem', 
         fontWeight: '700', 
         color: '#111827',
+        margin: 0,
         fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
       }}>
         Fleet Alerts
@@ -53,6 +54,7 @@ const Alerts = () => {
                     color: '#111827', 
                     fontWeight: '500',
                     marginBottom: '0.25rem',
+                    margin: 0,
                     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
                   }}>
                     {alert.message}
@@ -60,6 +62,7 @@ const Alerts = () => {
                   <p style={{ 
                     color: '#6b7280', 
                     fontSize: '0.875rem',
+                    margin: 0,
                     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
                   }}>
                     {getVehicleModel(alert.vehicleId)} • {alert.date}

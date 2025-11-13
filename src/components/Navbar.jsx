@@ -12,40 +12,108 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-white shadow-lg border-b">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center">
-            <div className="flex-shrink-0 flex items-center">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center mr-3">
-                <span className="text-white font-bold text-sm">FM</span>
+    <nav style={{
+      backgroundColor: 'white',
+      boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+      borderBottom: '1px solid #e5e7eb',
+      position: 'sticky',
+      top: 0,
+      zIndex: 50
+    }}>
+      <div style={{
+        maxWidth: '80rem',
+        margin: '0 auto',
+        padding: '0 1rem'
+      }}>
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          height: '4rem'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              flexShrink: 0
+            }}>
+              <div style={{
+                width: '2rem',
+                height: '2rem',
+                backgroundColor: '#2563eb',
+                borderRadius: '0.5rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginRight: '0.75rem'
+              }}>
+                <span style={{
+                  color: 'white',
+                  fontWeight: 'bold',
+                  fontSize: '0.875rem'
+                }}>
+                  FM
+                </span>
               </div>
-              <span className="text-xl font-bold text-gray-800">Fleet Monitor</span>
+              <span style={{
+                fontSize: '1.25rem',
+                fontWeight: 'bold',
+                color: '#1f2937'
+              }}>
+                Fleet Monitor
+              </span>
             </div>
-            <div className="hidden md:ml-10 md:flex md:space-x-8">
+            <div style={{
+              display: 'flex',
+              marginLeft: '2.5rem',
+              gap: '2rem'
+            }}>
               {navItems.map(({ path, icon, label }) => (
                 <NavLink
                   key={path}
                   to={path}
-                  className={({ isActive }) =>
-                    `inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
-                      isActive
-                        ? 'border-blue-500 text-gray-900'
-                        : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                    }`
-                  }
+                  style={({ isActive }) => ({
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    padding: '0.25rem 0.25rem 0.75rem 0.25rem',
+                    borderBottom: isActive ? '2px solid #3b82f6' : '2px solid transparent',
+                    fontSize: '0.875rem',
+                    fontWeight: '500',
+                    color: isActive ? '#111827' : '#6b7280',
+                    textDecoration: 'none',
+                    transition: 'all 0.2s'
+                  })}
                 >
-                  {React.createElement(icon, { size: 16, className: "mr-2" })}
+                  {React.createElement(icon, { size: 16, style: { marginRight: '0.5rem' } })}
                   {label}
                 </NavLink>
               ))}
             </div>
           </div>
-          <div className="flex items-center space-x-4">
-            <button className="p-2 rounded-md text-gray-400 hover:text-gray-500">
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '1rem'
+          }}>
+            <button style={{
+              padding: '0.5rem',
+              borderRadius: '0.375rem',
+              color: '#9ca3af',
+              backgroundColor: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              transition: 'color 0.2s'
+            }}>
               <Bell size={20} />
             </button>
-            <button className="p-2 rounded-md text-gray-400 hover:text-gray-500">
+            <button style={{
+              padding: '0.5rem',
+              borderRadius: '0.375rem',
+              color: '#9ca3af',
+              backgroundColor: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              transition: 'color 0.2s'
+            }}>
               <User size={20} />
             </button>
           </div>
