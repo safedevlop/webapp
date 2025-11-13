@@ -35,7 +35,7 @@ const Services = () => {
           Service Records
         </h2>
         <button
-          onClick={() => setShowModal(true)}
+          onClick={() => _setShowModal(true)}
           style={{
             display: 'flex',
             alignItems: 'center',
