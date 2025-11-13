@@ -5,7 +5,7 @@ import { services } from '../data/services';
 import { vehicles } from '../data/vehicles';
 
 const Services = () => {
-  const [_showModal, _setShowModal] = useState(false);
+  const [_showModal, setShowModal] = useState(false);
 
   const getVehicleModel = (vehicleId) => {
     const vehicle = vehicles.find(v => v.id === vehicleId);
@@ -36,7 +36,7 @@ const Services = () => {
           Service Records
         </h2>
         <button
-          onClick={() => _setShowModal(true)}
+          onClick={() => setShowModal(true)}
           style={{
             display: 'flex',
             alignItems: 'center',
