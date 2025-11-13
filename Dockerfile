@@ -1,9 +1,9 @@
 # Build stage
 FROM node:20-alpine AS build
 WORKDIR /app
-COPY webapp/package*.json ./
+COPY package*.json ./
 RUN npm ci
-COPY webapp/ .
+COPY . .
 RUN npm run build
 
 # Production stage
