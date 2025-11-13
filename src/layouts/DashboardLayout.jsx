@@ -1,3 +1,4 @@
+import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { LayoutDashboard, Car, Wrench, AlertTriangle, Settings, Bell, User } from 'lucide-react';
@@ -67,7 +68,7 @@ const DashboardLayout = () => {
             
             {/* Navigation Links */}
             <div style={{ display: 'flex', gap: '2rem' }}>
-              {navItems.map(({ path, icon: Icon, label }) => (
+              {navItems.map(({ path, icon, label }) => (
                 <NavLink
                   key={path}
                   to={path}
@@ -87,7 +88,7 @@ const DashboardLayout = () => {
                     borderBottom: isActive ? '2px solid white' : '2px solid transparent'
                   })}
                 >
-                  <Icon size={16} />
+                  {React.createElement(icon, { size: 16 })}
                   {label}
                 </NavLink>
               ))}

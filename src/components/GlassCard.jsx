@@ -1,6 +1,4 @@
-import { motion } from 'framer-motion';
-
-const GlassCard = ({ children, className = "", ...props }) => {
+const GlassCard = ({ children, ...props }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

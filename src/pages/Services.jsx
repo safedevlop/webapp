@@ -5,7 +5,7 @@ import { services } from '../data/services';
 import { vehicles } from '../data/vehicles';
 
 const Services = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [_showModal, _setShowModal] = useState(false);
 
   const getVehicleModel = (vehicleId) => {
     const vehicle = vehicles.find(v => v.id === vehicleId);

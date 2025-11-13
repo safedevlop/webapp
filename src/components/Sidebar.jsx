@@ -1,3 +1,4 @@
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { LayoutDashboard, Car, Wrench, AlertTriangle, Settings, Bell, User } from 'lucide-react';
 
@@ -22,7 +23,7 @@ const Navbar = () => {
               <span className="text-white font-bold text-xl">Fleet Monitor</span>
             </div>
             <div className="hidden md:flex items-center space-x-2">
-              {navItems.map(({ path, icon: Icon, label }) => (
+              {navItems.map(({ path, icon, label }) => (
                 <NavLink
                   key={path}
                   to={path}
@@ -34,7 +35,7 @@ const Navbar = () => {
                     }`
                   }
                 >
-                  <Icon size={18} />
+                  {React.createElement(icon, { size: 18 })}
                   <span className="text-sm font-medium">{label}</span>
                 </NavLink>
               ))}

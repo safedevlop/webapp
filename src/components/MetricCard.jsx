@@ -1,6 +1,7 @@
+import React from 'react';
 import GlassCard from './GlassCard';
 
-const MetricCard = ({ title, value, icon: Icon }) => {
+const MetricCard = ({ title, value, icon }) => {
   return (
     <GlassCard style={{ cursor: 'pointer', transition: 'all 0.3s ease' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -26,7 +27,7 @@ const MetricCard = ({ title, value, icon: Icon }) => {
           borderRadius: '0.5rem', 
           backgroundColor: '#dbeafe'
         }}>
-          <Icon size={24} style={{ color: '#2563eb' }} />
+          {icon && React.createElement(icon, { size: 24, style: { color: '#2563eb' } })}
         </div>
       </div>
     </GlassCard>
