@@ -13,71 +13,23 @@ const DashboardLayout = () => {
   ];
 
   return (
-    <div style={{ 
-      minHeight: '100vh', 
-      backgroundColor: '#f8fafc',
-      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-      fontWeight: '400',
-      letterSpacing: '-0.01em'
-    }}>
-      <nav style={{ 
-        backgroundColor: '#1e40af', 
-        boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
-        position: 'sticky',
-        top: 0,
-        zIndex: 50
-      }}>
-        <div style={{ 
-          maxWidth: '80rem', 
-          margin: '0 auto', 
-          padding: '0 1rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          height: '4rem'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <div style={{ display: 'flex', alignItems: 'center', marginRight: '2.5rem' }}>
-              <div style={{ 
-                width: '2rem', 
-                height: '2rem', 
-                backgroundColor: 'white', 
-                borderRadius: '0.5rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginRight: '0.75rem'
-              }}>
-                <span style={{ color: '#1e40af', fontWeight: 'bold', fontSize: '0.875rem' }}>FM</span>
+    <div className="dashboard-layout">
+      <nav className="dashboard-nav">
+        <div className="dashboard-nav-container">
+          <div className="dashboard-nav-left">
+            <div className="dashboard-brand">
+              <div className="dashboard-logo">
+                <span className="dashboard-logo-text">FM</span>
               </div>
-              <span style={{ 
-                fontSize: '1.25rem', 
-                fontWeight: '600', 
-                color: 'white'
-              }}>
-                Fleet Monitor
-              </span>
+              <span className="dashboard-title">Fleet Monitor</span>
             </div>
             
-            <div style={{ display: 'flex', gap: '2rem' }}>
+            <div className="dashboard-nav-links">
               {navItems.map(({ path, icon, label }) => (
                 <NavLink
                   key={path}
                   to={path}
-                  style={({ isActive }) => ({
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    padding: '0.5rem 1rem',
-                    borderRadius: '0.375rem',
-                    fontSize: '0.875rem',
-                    fontWeight: '500',
-                    textDecoration: 'none',
-                    transition: 'all 0.2s',
-                    backgroundColor: isActive ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
-                    color: isActive ? 'white' : '#bfdbfe',
-                    borderBottom: isActive ? '2px solid white' : '2px solid transparent'
-                  })}
+                  className={({ isActive }) => `dashboard-nav-link ${isActive ? 'active' : ''}`}
                 >
                   {React.createElement(icon, { size: 16 })}
                   {label}
@@ -86,38 +38,18 @@ const DashboardLayout = () => {
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <button style={{ 
-              padding: '0.5rem', 
-              borderRadius: '0.375rem',
-              backgroundColor: 'transparent',
-              border: 'none',
-              color: '#bfdbfe',
-              cursor: 'pointer',
-              transition: 'color 0.2s'
-            }}>
+          <div className="dashboard-nav-right">
+            <button className="dashboard-nav-button">
               <Bell size={20} />
             </button>
-            <button style={{ 
-              padding: '0.5rem', 
-              borderRadius: '0.375rem',
-              backgroundColor: 'transparent',
-              border: 'none',
-              color: '#bfdbfe',
-              cursor: 'pointer',
-              transition: 'color 0.2s'
-            }}>
+            <button className="dashboard-nav-button">
               <User size={20} />
             </button>
           </div>
         </div>
       </nav>
 
-      <main style={{ 
-        maxWidth: '80rem', 
-        margin: '0 auto', 
-        padding: '1.5rem 1rem' 
-      }}>
+      <main className="dashboard-main">
         <Outlet />
       </main>
     </div>

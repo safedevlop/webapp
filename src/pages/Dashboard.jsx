@@ -6,12 +6,8 @@ import { dashboardMetrics, mileageData, serviceData } from '../data/vehicles';
 
 const Dashboard = () => {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
-        gap: '1.5rem' 
-      }}>
+    <div className="dashboard-container">
+      <div className="dashboard-metrics">
         <MetricCard
           title="Active Vehicles"
           value={dashboardMetrics.activeVehicles}
@@ -34,20 +30,9 @@ const Dashboard = () => {
         />
       </div>
 
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', 
-        gap: '1.5rem' 
-      }}>
+      <div className="dashboard-charts">
         <GlassCard>
-          <h3 style={{ 
-            fontSize: '1.125rem', 
-            fontWeight: '600', 
-            color: '#111827', 
-            marginBottom: '1rem' 
-          }}>
-            Mileage Trend
-          </h3>
+          <h3 className="chart-title">Mileage Trend</h3>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={mileageData}>
               <XAxis dataKey="month" stroke="#374151" />
@@ -58,14 +43,7 @@ const Dashboard = () => {
         </GlassCard>
 
         <GlassCard>
-          <h3 style={{ 
-            fontSize: '1.125rem', 
-            fontWeight: '600', 
-            color: '#111827', 
-            marginBottom: '1rem' 
-          }}>
-            Services Per Month
-          </h3>
+          <h3 className="chart-title">Services Per Month</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={serviceData}>
               <XAxis dataKey="month" stroke="#374151" />
