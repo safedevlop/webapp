@@ -141,3 +141,5 @@ DEBUG.md
 DEPLOYMENT.md
 .env.example
 FINAL-PUSH-STATUS.md
+
+fix-user-ids.sql
