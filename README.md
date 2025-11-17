@@ -56,6 +56,51 @@ Run the SQL files in your Supabase dashboard:
 1. `supabase-schema.sql` - Main database schema
 2. `add-update-policy.sql` - RLS policy for updates
 
+### Database Schema
+
+#### vehicles
+- `id` - SERIAL PRIMARY KEY
+- `model` - VARCHAR(100) NOT NULL
+- `reg_number` - VARCHAR(20) UNIQUE NOT NULL
+- `status` - VARCHAR(20) DEFAULT 'Active' (Active, In Service, Maintenance)
+- `last_service` - DATE
+- `next_service` - DATE
+- `mileage` - INTEGER DEFAULT 0
+- `image_url` - TEXT
+- `user_id` - UUID (references auth.users)
+- `created_at` - TIMESTAMP WITH TIME ZONE
+- `updated_at` - TIMESTAMP WITH TIME ZONE
+
+#### service_records
+- `id` - SERIAL PRIMARY KEY
+- `vehicle_id` - INTEGER (references vehicles.id)
+- `type` - VARCHAR(100) NOT NULL
+- `mechanic` - VARCHAR(100)
+- `cost` - DECIMAL(10,2)
+- `status` - VARCHAR(20) DEFAULT 'Completed' (Completed, In Progress, Scheduled)
+- `date` - DATE NOT NULL
+- `notes` - TEXT
+- `user_id` - UUID (references auth.users)
+- `created_at` - TIMESTAMP WITH TIME ZONE
+
+#### alerts
+- `id` - SERIAL PRIMARY KEY
+- `vehicle_id` - INTEGER (references vehicles.id)
+- `type` - VARCHAR(20) NOT NULL (critical, warning, info)
+- `message` - TEXT NOT NULL
+- `date` - DATE DEFAULT CURRENT_DATE
+- `user_id` - UUID (references auth.users)
+- `created_at` - TIMESTAMP WITH TIME ZONE
+
+#### profiles
+- `id` - UUID PRIMARY KEY (references auth.users)
+- `name` - VARCHAR(100)
+- `role` - VARCHAR(50) DEFAULT 'Fleet Manager'
+- `phone` - VARCHAR(20)
+- `avatar_url` - TEXT
+- `created_at` - TIMESTAMP WITH TIME ZONE
+- `updated_at` - TIMESTAMP WITH TIME ZONE
+
 ## Scripts
 
 - `npm run dev` - Start development server
