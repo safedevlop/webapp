@@ -1,12 +1,33 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Filter } from 'lucide-react';
 import GlassCard from '../components/GlassCard';
-import { vehicles } from '../data/vehicles';
+import { vehicleService } from '../lib/supabase';
+import { vehicles as staticVehicles } from '../data/vehicles';
 
 const Vehicles = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
+  const [vehicles, setVehicles] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchVehicles = async () => {
+      try {
+        const data = await vehicleService.getAll();
+        // Use static data as fallback if no database data
+        setVehicles(data.length > 0 ? data : staticVehicles);
+      } catch (error) {
+        console.error('Error fetching vehicles:', error);
+        // Use static data on error
+        setVehicles(staticVehicles);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchVehicles();
+  }, []);
 
   const filteredVehicles = vehicles.filter(vehicle => {
     const matchesSearch = vehicle.model.toLowerCase().includes(searchTerm.toLowerCase());
@@ -26,6 +47,21 @@ const Vehicles = () => {
         return { backgroundColor: '#f3f4f6', color: '#374151', border: '1px solid #d1d5db' };
     }
   };
+
+  if (loading) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '50vh',
+        fontSize: '1.125rem',
+        color: '#6b7280'
+      }}>
+        Loading vehicles...
+      </div>
+    );
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -125,6 +161,9 @@ const Vehicles = () => {
                   </span>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  <p style={{ fontSize: '0.875rem', color: '#374151', margin: 0 }}>
+                    Reg: {vehicle.reg_number || vehicle.regNumber}
+                  </p>
                   <p style={{ fontSize: '0.875rem', color: '#374151', margin: 0 }}>
                     Mileage: {vehicle.mileage.toLocaleString()} km
                   </p>

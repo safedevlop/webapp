@@ -1,14 +1,51 @@
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 import { ArrowLeft, Calendar, Gauge, Wrench, AlertTriangle } from 'lucide-react';
 import GlassCard from '../components/GlassCard';
-import { vehicles } from '../data/vehicles';
-import { services } from '../data/services';
+import { vehicleService, serviceRecordService } from '../lib/supabase';
+import { vehicles as staticVehicles } from '../data/vehicles';
+import { services as staticServices } from '../data/services';
 
 const VehicleDetails = () => {
   const { id } = useParams();
-  const vehicle = vehicles.find(v => v.id === parseInt(id));
-  const vehicleServices = services.filter(s => s.vehicleId === parseInt(id));
+  const [vehicle, setVehicle] = useState(null);
+  const [vehicleServices, setVehicleServices] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [vehicleData, servicesData] = await Promise.all([
+          vehicleService.getById(parseInt(id)),
+          serviceRecordService.getByVehicleId(parseInt(id))
+        ]);
+        
+        // Use database data if available, otherwise fallback to static data
+        if (vehicleData) {
+          setVehicle(vehicleData);
+          setVehicleServices(servicesData || []);
+        } else {
+          // Fallback to static data
+          const staticVehicle = staticVehicles.find(v => v.id === parseInt(id));
+          const staticVehicleServices = staticServices.filter(s => s.vehicleId === parseInt(id));
+          setVehicle(staticVehicle);
+          setVehicleServices(staticVehicleServices);
+        }
+      } catch (error) {
+        console.error('Error fetching vehicle details:', error);
+        // Fallback to static data on error
+        const staticVehicle = staticVehicles.find(v => v.id === parseInt(id));
+        const staticVehicleServices = staticServices.filter(s => s.vehicleId === parseInt(id));
+        setVehicle(staticVehicle);
+        setVehicleServices(staticVehicleServices);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [id]);
 
   const temperatureData = [
     { time: '00:00', temp: 85 },
@@ -18,6 +55,21 @@ const VehicleDetails = () => {
     { time: '16:00', temp: 88 },
     { time: '20:00', temp: 86 }
   ];
+
+  if (loading) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '50vh',
+        fontSize: '1.125rem',
+        color: '#6b7280'
+      }}>
+        Loading vehicle details...
+      </div>
+    );
+  }
 
   if (!vehicle) {
     return (
@@ -110,7 +162,7 @@ const VehicleDetails = () => {
                   textTransform: 'uppercase',
                   letterSpacing: '0.05em'
                 }}>
-                  Vehicle ID
+                  Registration
                 </p>
                 <p style={{ 
                   fontSize: '1rem', 
@@ -118,7 +170,7 @@ const VehicleDetails = () => {
                   color: '#111827',
                   margin: 0
                 }}>
-                  #{vehicle.id.toString().padStart(4, '0')}
+                  {vehicle.reg_number}
                 </p>
               </div>
             </div>
@@ -290,7 +342,7 @@ const VehicleDetails = () => {
                     color: '#111827',
                     margin: 0
                   }}>
-                    ${service.cost}
+                    Rs {service.cost}
                   </p>
                   <p style={{ 
                     fontSize: '0.75rem', 

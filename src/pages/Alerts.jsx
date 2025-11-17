@@ -1,9 +1,31 @@
+import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import GlassCard from '../components/GlassCard';
-import { alerts } from '../data/services';
-import { vehicles } from '../data/vehicles';
+import { alertService, vehicleService } from '../lib/supabase';
 
 const Alerts = () => {
+  const [alerts, setAlerts] = useState([]);
+  const [vehicles, setVehicles] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [alertsData, vehiclesData] = await Promise.all([
+          alertService.getAll(),
+          vehicleService.getAll()
+        ]);
+        setAlerts(alertsData);
+        setVehicles(vehiclesData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
   const getVehicleModel = (vehicleId) => {
     const vehicle = vehicles.find(v => v.id === vehicleId);
     return vehicle ? vehicle.model : 'Unknown';
@@ -21,6 +43,21 @@ const Alerts = () => {
         return { backgroundColor: '#f3f4f6', color: '#374151', border: '1px solid #d1d5db' };
     }
   };
+
+  if (loading) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '50vh',
+        fontSize: '1.125rem',
+        color: '#6b7280'
+      }}>
+        Loading alerts...
+      </div>
+    );
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -65,7 +102,7 @@ const Alerts = () => {
                     margin: 0,
                     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
                   }}>
-                    {getVehicleModel(alert.vehicleId)} • {alert.date}
+                    {getVehicleModel(alert.vehicle_id)} • {alert.date}
                   </p>
                 </div>
               </div>

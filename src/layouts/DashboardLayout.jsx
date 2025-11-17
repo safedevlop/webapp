@@ -1,7 +1,8 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Car, Wrench, AlertTriangle, Settings, Bell, User } from 'lucide-react';
+import { LayoutDashboard, Car, Wrench, AlertTriangle, Settings, Bell } from 'lucide-react';
+import ProfileDropdown from '../components/ProfileDropdown';
 
 const DashboardLayout = () => {
   const navItems = [
@@ -42,9 +43,7 @@ const DashboardLayout = () => {
             <button className="dashboard-nav-button">
               <Bell size={20} />
             </button>
-            <button className="dashboard-nav-button">
-              <User size={20} />
-            </button>
+            <ProfileDropdown />
           </div>
         </div>
       </nav>

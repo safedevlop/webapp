@@ -89,3 +89,55 @@ temp/
 
 # Project documentation
 PROJECT_REPORT.md
+
+# Test files and credentials
+test-users.md
+sample-data.sql
+supabase-schema.sql
+
+# Docker and deployment
+.dockerignore
+docker-compose.yml
+docker-compose.override.yml
+
+# Database and backup files
+*.sql
+*.db
+*.sqlite
+*.sqlite3
+
+# Security and keys
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# Local development
+.vite/
+.turbo/
+.vercel/
+.netlify/
+
+# Package manager files
+pnpm-lock.yaml
+bun.lockb
+
+# Testing
+__tests__/
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Misc
+*.tsbuildinfo
+.nyc_output
+.sass-cache/
+.connect.lock
+.typings/
+
+PRE-PUSH-CHECKLIST.md
+DEBUG.md
+DEPLOYMENT.md
+.env.example
+FINAL-PUSH-STATUS.md
