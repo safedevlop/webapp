@@ -34,7 +34,7 @@ A modern web application for monitoring and managing fleet vehicles and their ma
 
 3. **Environment Setup**
    ```bash
-   cp .env.example .env
+   .env
    # Add your Supabase credentials to .env
    ```
 
