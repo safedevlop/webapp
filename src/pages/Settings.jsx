@@ -5,23 +5,24 @@ import GlassCard from '../components/GlassCard';
 
 const Settings = () => {
   const { user, updateProfile } = useAuth();
-  const [profile, setProfile] = useState({
-    name: '',
-    email: '',
-    role: 'Fleet Manager',
-    phone: ''
-  });
+  const [profile, setProfile] = useState(() => ({
+    name: user?.user_metadata?.name || '',
+    email: user?.email || '',
+    role: user?.user_metadata?.role || 'Fleet Manager',
+    phone: user?.user_metadata?.phone || ''
+  }));
 
   useEffect(() => {
     if (user) {
-      setProfile({
-        name: user.user_metadata?.name || '',
-        email: user.email || '',
-        role: user.user_metadata?.role || 'Fleet Manager',
-        phone: user.user_metadata?.phone || ''
-      });
+      setProfile(prev => ({
+        ...prev,
+        name: user.user_metadata?.name || prev.name,
+        email: user.email || prev.email,
+        role: user.user_metadata?.role || prev.role,
+        phone: user.user_metadata?.phone || prev.phone
+      }));
     }
-  }, [user]);
+  }, [user?.id]);
 
   const [notifications, setNotifications] = useState({
     emailAlerts: true,
