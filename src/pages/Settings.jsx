@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { User, Bell, Shield, Truck, Save, Camera } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import GlassCard from '../components/GlassCard';
@@ -12,17 +12,7 @@ const Settings = () => {
     phone: user?.user_metadata?.phone || ''
   }));
 
-  useEffect(() => {
-    if (user) {
-      setProfile(prev => ({
-        ...prev,
-        name: user.user_metadata?.name || prev.name,
-        email: user.email || prev.email,
-        role: user.user_metadata?.role || prev.role,
-        phone: user.user_metadata?.phone || prev.phone
-      }));
-    }
-  }, [user?.id]);
+
 
   const [notifications, setNotifications] = useState({
     emailAlerts: true,
