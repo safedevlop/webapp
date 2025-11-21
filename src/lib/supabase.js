@@ -138,6 +138,6 @@ export const alertService = {
       .eq('id', id)
     
     if (error) throw error
-    
+  
   }
 }

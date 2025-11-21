@@ -9,6 +9,7 @@ export const useAuth = () => {
     throw new Error('useAuth must be used within AuthProvider')
   }
   return context
+  
 }
 
 export const AuthProvider = ({ children }) => {
@@ -42,7 +43,7 @@ export const AuthProvider = ({ children }) => {
         data: metadata
       }
     })
-    
+
     return { data, error }
   }
 
