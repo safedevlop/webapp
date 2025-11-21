@@ -51,11 +51,25 @@ const Services = () => {
   const getStatusStyle = (status) => {
     switch (status) {
       case 'Completed': 
-        return { backgroundColor: '#dcfce7', color: '#166534', border: '1px solid #bbf7d0' };
+        return { 
+          backgroundColor: '#dcfce7', 
+          color: '#166534', 
+          border: '1px solid #bbf7d0' 
+        };
+
       case 'In Progress': 
-        return { backgroundColor: '#fef3c7', color: '#92400e', border: '1px solid #fde68a' };
+        return { 
+          backgroundColor: '#fef3c7', 
+          color: '#92400e', 
+          border: '1px solid #fde68a' 
+        };
+
       default: 
-        return { backgroundColor: '#f3f4f6', color: '#374151', border: '1px solid #d1d5db' };
+        return { 
+          backgroundColor: '#f3f4f6', 
+          color: '#374151', 
+          border: '1px solid #d1d5db' 
+        };
     }
   };
 
