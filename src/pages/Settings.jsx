@@ -12,8 +12,6 @@ const Settings = () => {
     phone: user?.user_metadata?.phone || ''
   }));
 
-
-
   const [notifications, setNotifications] = useState({
     emailAlerts: true,
     smsAlerts: false,
