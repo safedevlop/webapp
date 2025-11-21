@@ -15,6 +15,7 @@ export const vehicleService = {
     
     if (error) throw error
     return data
+
   },
 
   async getById(id) {
@@ -103,6 +104,7 @@ export const serviceRecordService = {
     
     if (error) throw error
     return data[0]
+
   }
 }
 
@@ -115,6 +117,7 @@ export const alertService = {
     
     if (error) throw error
     return data
+
   },
 
   async create(alert) {
@@ -125,6 +128,7 @@ export const alertService = {
     
     if (error) throw error
     return data[0]
+
   },
 
   async dismiss(id) {
@@ -134,5 +138,6 @@ export const alertService = {
       .eq('id', id)
     
     if (error) throw error
+    
   }
 }
