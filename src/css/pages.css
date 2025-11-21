@@ -123,9 +123,17 @@
   border-radius: 0.5rem;
 }
 
-.vehicle-metric-icon.blue { background-color: #dbeafe; }
-.vehicle-metric-icon.green { background-color: #dcfce7; }
-.vehicle-metric-icon.yellow { background-color: #fef3c7; }
+.vehicle-metric-icon.blue { 
+  background-color: #dbeafe; 
+}
+
+.vehicle-metric-icon.green { 
+  background-color: #dcfce7; 
+}
+
+.vehicle-metric-icon.yellow { 
+  background-color: #fef3c7; 
+}
 
 .vehicle-metric-info h4 {
   font-size: 0.75rem;
@@ -201,6 +209,7 @@
 
 .services-table td {
   color: #111827;
+
 }
 
 /* Alerts Page */
@@ -225,9 +234,20 @@
   border: 1px solid #e2e8f0;
 }
 
-.alert-card.critical { background-color: #fef2f2; border-color: #fecaca; }
-.alert-card.warning { background-color: #fffbeb; border-color: #fed7aa; }
-.alert-card.info { background-color: #eff6ff; border-color: #bfdbfe; }
+.alert-card.critical { 
+  background-color: #fef2f2; 
+  border-color: #fecaca; 
+}
+
+.alert-card.warning { 
+  background-color: #fffbeb; 
+  border-color: #fed7aa; 
+}
+
+.alert-card.info { 
+  background-color: #eff6ff; 
+  border-color: #bfdbfe; 
+}
 
 .alert-content {
   display: flex;
@@ -240,9 +260,18 @@
   border-radius: 0.5rem;
 }
 
-.alert-icon.critical { background-color: #fee2e2; }
-.alert-icon.warning { background-color: #fef3c7; }
-.alert-icon.info { background-color: #dbeafe; }
+.alert-icon.critical { 
+  background-color: #fee2e2; 
+}
+
+.alert-icon.warning { 
+  background-color: #fef3c7; 
+}
+
+.alert-icon.info { 
+  background-color: #dbeafe; 
+}
+
 
 .alert-info h3 {
   font-size: 0.875rem;
