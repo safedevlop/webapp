@@ -101,6 +101,25 @@ Run the SQL files in your Supabase dashboard:
 - `created_at` - TIMESTAMP WITH TIME ZONE
 - `updated_at` - TIMESTAMP WITH TIME ZONE
 
+#### vehicle_details
+- `id` - SERIAL PRIMARY KEY
+- `vehicle_id` - INTEGER (references vehicles.id)
+- `engine_type` - VARCHAR(100)
+- `fuel_type` - VARCHAR(50) DEFAULT 'Diesel'
+- `transmission` - VARCHAR(50) DEFAULT 'Manual'
+- `year` - INTEGER
+- `color` - VARCHAR(50)
+- `vin` - VARCHAR(100)
+- `insurance_expiry` - DATE
+- `registration_expiry` - DATE
+- `fuel_capacity` - DECIMAL(5,2)
+- `engine_capacity` - DECIMAL(5,2)
+- `max_load_capacity` - INTEGER
+- `seating_capacity` - INTEGER
+- `user_id` - UUID (references auth.users)
+- `created_at` - TIMESTAMP WITH TIME ZONE
+- `updated_at` - TIMESTAMP WITH TIME ZONE
+
 ## Scripts
 
 - `npm run dev` - Start development server

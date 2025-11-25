@@ -108,6 +108,19 @@ export const serviceRecordService = {
   }
 }
 
+export const vehicleDetailsService = {
+  async getByVehicleId(vehicleId) {
+    const { data, error } = await supabase
+      .from('vehicle_details')
+      .select('*')
+      .eq('vehicle_id', vehicleId)
+      .single()
+    
+    if (error && error.code !== 'PGRST116') throw error // Ignore "not found" errors
+    return data
+  }
+}
+
 export const alertService = {
   async getAll() {
     const { data, error } = await supabase

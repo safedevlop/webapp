@@ -168,10 +168,10 @@ const Vehicles = () => {
                     Mileage: {vehicle.mileage.toLocaleString()} km
                   </p>
                   <p style={{ fontSize: '0.875rem', color: '#374151', margin: 0 }}>
-                    Last Service: {vehicle.lastService}
+                    Last Service: {vehicle.last_service || vehicle.lastService || 'N/A'}
                   </p>
                   <p style={{ fontSize: '0.875rem', color: '#374151', margin: 0 }}>
-                    Next Service: {vehicle.nextService}
+                    Next Service: {vehicle.next_service || vehicle.nextService || 'N/A'}
                   </p>
                 </div>
               </div>

@@ -3,27 +3,30 @@ import { useParams, Link } from 'react-router-dom';
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 import { ArrowLeft, Calendar, Gauge, Wrench, AlertTriangle } from 'lucide-react';
 import GlassCard from '../components/GlassCard';
-import { vehicleService, serviceRecordService } from '../lib/supabase';
+import { vehicleService, serviceRecordService, vehicleDetailsService } from '../lib/supabase';
 import { vehicles as staticVehicles } from '../data/vehicles';
 import { services as staticServices } from '../data/services';
 
 const VehicleDetails = () => {
   const { id } = useParams();
   const [vehicle, setVehicle] = useState(null);
+  const [vehicleDetails, setVehicleDetails] = useState(null);
   const [vehicleServices, setVehicleServices] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [vehicleData, servicesData] = await Promise.all([
+        const [vehicleData, vehicleDetailsData, servicesData] = await Promise.all([
           vehicleService.getById(parseInt(id)),
+          vehicleDetailsService.getByVehicleId(parseInt(id)),
           serviceRecordService.getByVehicleId(parseInt(id))
         ]);
         
         // Use database data if available, otherwise fallback to static data
         if (vehicleData) {
           setVehicle(vehicleData);
+          setVehicleDetails(vehicleDetailsData);
           setVehicleServices(servicesData || []);
         } else {
           // Fallback to static data
@@ -228,7 +231,7 @@ const VehicleDetails = () => {
                   color: '#111827',
                   margin: 0
                 }}>
-                  {vehicle.lastService}
+                  {vehicle.last_service || vehicle.lastService || 'N/A'}
                 </p>
               </div>
             </div>
@@ -257,13 +260,82 @@ const VehicleDetails = () => {
                   color: '#111827',
                   margin: 0
                 }}>
-                  {vehicle.nextService}
+                  {vehicle.next_service || vehicle.nextService || 'N/A'}
                 </p>
               </div>
             </div>
           </div>
         </div>
       </GlassCard>
+
+      {vehicleDetails && (
+        <GlassCard>
+          <h3 style={{ 
+            fontSize: '1.125rem', 
+            fontWeight: '600', 
+            color: '#111827', 
+            marginBottom: '1rem',
+            margin: 0
+          }}>
+            Vehicle Specifications
+          </h3>
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
+            gap: '1rem',
+            marginTop: '1rem'
+          }}>
+            <div>
+              <p style={{ fontSize: '0.75rem', color: '#6b7280', margin: 0, textTransform: 'uppercase' }}>VIN</p>
+              <p style={{ fontSize: '0.875rem', fontWeight: '500', color: '#111827', margin: 0 }}>{vehicleDetails.vin || 'N/A'}</p>
+            </div>
+            <div>
+              <p style={{ fontSize: '0.75rem', color: '#6b7280', margin: 0, textTransform: 'uppercase' }}>Year</p>
+              <p style={{ fontSize: '0.875rem', fontWeight: '500', color: '#111827', margin: 0 }}>{vehicleDetails.year || 'N/A'}</p>
+            </div>
+            <div>
+              <p style={{ fontSize: '0.75rem', color: '#6b7280', margin: 0, textTransform: 'uppercase' }}>Engine Type</p>
+              <p style={{ fontSize: '0.875rem', fontWeight: '500', color: '#111827', margin: 0 }}>{vehicleDetails.engine_type || 'N/A'}</p>
+            </div>
+            <div>
+              <p style={{ fontSize: '0.75rem', color: '#6b7280', margin: 0, textTransform: 'uppercase' }}>Fuel Type</p>
+              <p style={{ fontSize: '0.875rem', fontWeight: '500', color: '#111827', margin: 0 }}>{vehicleDetails.fuel_type || 'N/A'}</p>
+            </div>
+            <div>
+              <p style={{ fontSize: '0.75rem', color: '#6b7280', margin: 0, textTransform: 'uppercase' }}>Transmission</p>
+              <p style={{ fontSize: '0.875rem', fontWeight: '500', color: '#111827', margin: 0 }}>{vehicleDetails.transmission || 'N/A'}</p>
+            </div>
+            <div>
+              <p style={{ fontSize: '0.75rem', color: '#6b7280', margin: 0, textTransform: 'uppercase' }}>Engine Capacity</p>
+              <p style={{ fontSize: '0.875rem', fontWeight: '500', color: '#111827', margin: 0 }}>{vehicleDetails.engine_capacity ? `${vehicleDetails.engine_capacity}L` : 'N/A'}</p>
+            </div>
+            <div>
+              <p style={{ fontSize: '0.75rem', color: '#6b7280', margin: 0, textTransform: 'uppercase' }}>Fuel Capacity</p>
+              <p style={{ fontSize: '0.875rem', fontWeight: '500', color: '#111827', margin: 0 }}>{vehicleDetails.fuel_capacity ? `${vehicleDetails.fuel_capacity}L` : 'N/A'}</p>
+            </div>
+            <div>
+              <p style={{ fontSize: '0.75rem', color: '#6b7280', margin: 0, textTransform: 'uppercase' }}>Seating Capacity</p>
+              <p style={{ fontSize: '0.875rem', fontWeight: '500', color: '#111827', margin: 0 }}>{vehicleDetails.seating_capacity || 'N/A'}</p>
+            </div>
+            <div>
+              <p style={{ fontSize: '0.75rem', color: '#6b7280', margin: 0, textTransform: 'uppercase' }}>Max Load</p>
+              <p style={{ fontSize: '0.875rem', fontWeight: '500', color: '#111827', margin: 0 }}>{vehicleDetails.max_load_capacity ? `${vehicleDetails.max_load_capacity} kg` : 'N/A'}</p>
+            </div>
+            <div>
+              <p style={{ fontSize: '0.75rem', color: '#6b7280', margin: 0, textTransform: 'uppercase' }}>Insurance Expiry</p>
+              <p style={{ fontSize: '0.875rem', fontWeight: '500', color: '#111827', margin: 0 }}>{vehicleDetails.insurance_expiry || 'N/A'}</p>
+            </div>
+            <div>
+              <p style={{ fontSize: '0.75rem', color: '#6b7280', margin: 0, textTransform: 'uppercase' }}>Registration Expiry</p>
+              <p style={{ fontSize: '0.875rem', fontWeight: '500', color: '#111827', margin: 0 }}>{vehicleDetails.registration_expiry || 'N/A'}</p>
+            </div>
+            <div>
+              <p style={{ fontSize: '0.75rem', color: '#6b7280', margin: 0, textTransform: 'uppercase' }}>Color</p>
+              <p style={{ fontSize: '0.875rem', fontWeight: '500', color: '#111827', margin: 0 }}>{vehicleDetails.color || 'N/A'}</p>
+            </div>
+          </div>
+        </GlassCard>
+      )}
 
       <GlassCard>
         <h3 style={{ 
