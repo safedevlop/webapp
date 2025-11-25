@@ -13,6 +13,7 @@ const VehicleDetails = () => {
   const [vehicleDetails, setVehicleDetails] = useState(null);
   const [vehicleServices, setVehicleServices] = useState([]);
   const [loading, setLoading] = useState(true);
+  
 
   useEffect(() => {
     const fetchData = async () => {
