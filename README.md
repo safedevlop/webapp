@@ -129,10 +129,57 @@ Run the SQL files in your Supabase dashboard:
 
 ## Docker Deployment
 
+### Run from Docker Hub
 ```bash
+# Pull and run the latest image
+docker run -p 80:80 -e VITE_SUPABASE_URL=your_supabase_url -e VITE_SUPABASE_ANON_KEY=your_supabase_anon_key your-dockerhub-username/fleet-monitor:latest
+
+# Or run in detached mode
+docker run -d -p 80:80 -e VITE_SUPABASE_URL=your_supabase_url -e VITE_SUPABASE_ANON_KEY=your_supabase_anon_key your-dockerhub-username/fleet-monitor:latest
+```
+
+### Build and Run Locally
+```bash
+# Make sure you're in the project directory
+cd webproject
+
+# Build the image
 docker build -t fleet-dashboard .
+
+# Run the container
 docker run -p 80:80 fleet-dashboard
 ```
+
+### Troubleshooting Docker Build
+If you get "requires 1 argument" error:
+```bash
+# Make sure you're in the correct directory with Dockerfile
+pwd  # Should show path ending with /webproject
+ls   # Should show Dockerfile
+
+# Then run build command with context path
+docker build -t fleet-dashboard .
+```
+
+If you get "no space left on device" error:
+```bash
+# Clean up Docker system
+docker system prune -a
+
+# Remove unused images
+docker image prune -a
+
+# Check disk usage
+docker system df
+
+# Then try building again
+docker build -t fleet-dashboard .
+```
+
+### Environment Variables for Docker
+When running from Docker Hub, you must provide Supabase credentials:
+- `VITE_SUPABASE_URL` - Your Supabase project URL
+- `VITE_SUPABASE_ANON_KEY` - Your Supabase anonymous key
 
 ## Project Structure
 

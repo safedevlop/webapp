@@ -1,0 +1,77 @@
+Fleet Monitoring Dashboard - Docker Deployment Guide
+=====================================================
+
+## Problem Encountered
+- Docker build was failing with "no space left on device" error
+- Docker had accumulated 62GB of unused containers and images
+- Environment variables weren't being passed correctly to the build
+
+## Solution Steps
+
+### 1. Clean Up Docker Space
+```bash
+# Check Docker disk usage
+docker system df
+
+# Stop all containers
+docker stop $(docker ps -aq)
+
+# Remove all containers
+docker rm $(docker ps -aq)
+
+# Remove all images
+docker rmi $(docker images -q) -f
+
+# Clean everything
+docker system prune -a --volumes -f
+
+# Verify cleanup
+docker system df
+```
+
+### 2. Build Docker Image with Environment Variables
+```bash
+# Build with Supabase credentials as build arguments
+docker build \
+  --build-arg VITE_SUPABASE_URL=https://zywnoobbvbpwpqyjijgm.supabase.co \
+  --build-arg VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp5d25vb2JidmJwd3BxeWppamdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzNDk1NTAsImV4cCI6MjA3ODkyNTU1MH0.lIIUstyInlsA3kJ5uaYRgpei-3AJqCj36SZ8xBjbXQg \
+  -t fleet-dashboard .
+```
+
+### 3. Run the Container
+```bash
+# Run the container on port 80
+docker run -p 80:80 fleet-dashboard
+
+# Or run in detached mode (background)
+docker run -d -p 80:80 fleet-dashboard
+```
+
+### 4. Access the Application
+- Open browser and go to: http://localhost
+- You should see the Fleet Monitoring Dashboard login page
+- Sign up for a new account or login with existing credentials
+
+## Key Points
+
+1. **Environment Variables**: Must be passed as --build-arg during build time, not runtime
+2. **Space Management**: Docker can accumulate large amounts of unused data
+3. **Port Mapping**: -p 80:80 maps container port 80 to host port 80
+4. **Supabase Integration**: The app connects to the live Supabase database
+
+## Troubleshooting
+
+- If page is blank: Check browser console for "supabase url is required" error
+- If build fails: Ensure you're in the webproject directory with Dockerfile
+- If space issues: Run docker system prune -a --volumes -f
+
+## Alternative: Use Pre-built Image from Docker Hub
+```bash
+docker run -p 80:80 -e VITE_SUPABASE_URL=https://zywnoobbvbpwpqyjijgm.supabase.co -e VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp5d25vb2JidmJwd3BxeWppamdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzNDk1NTAsImV4cCI6MjA3ODkyNTU1MH0.lIIUstyInlsA3kJ5uaYRgpei-3AJqCj36SZ8xBjbXQg your-dockerhub-username/fleet-monitor:latest
+```
+
+## Final Result
+- Successfully deployed Fleet Monitoring Dashboard in Docker
+- Application accessible at http://localhost
+- Full functionality including authentication, vehicle management, and service records
+- Connected to live Supabase database with real-time updates
