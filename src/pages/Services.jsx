@@ -161,7 +161,7 @@ const Services = () => {
                     >
                       <option value="Completed">Completed</option>
                       <option value="In Progress">In Progress</option>
-                      <option value="Pending">Pending</option>
+                      <option value="Scheduled">Scheduled</option>
                     </select>
                   </td>
                 </tr>
