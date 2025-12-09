@@ -17,18 +17,22 @@ jobs:
       with:
         node-version: '20'
         cache: 'npm'
-        cache-dependency-path: package-lock.json
+        cache-dependency-path: webproject/package-lock.json
     
     - name: Install dependencies
+      working-directory: ./webproject
       run: npm ci
     
     - name: Run linter
+      working-directory: ./webproject
       run: npm run lint
     
     - name: Run tests
+      working-directory: ./webproject
       run: npm test -- --run
     
     - name: Build
+      working-directory: ./webproject
       run: npm run build
 
   deploy:
@@ -48,7 +52,7 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
-        context: .
+        context: ./webproject
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/fleet-monitor:latest
         build-args: |
