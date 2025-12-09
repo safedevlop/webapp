@@ -124,10 +124,10 @@ pnpm-lock.yaml
 bun.lockb
 
 # Testing
-__tests__/
-test-results/
-playwright-report/
-playwright/.cache/
+#__tests__/
+#test-results/
+#playwright-report/
+#playwright/.cache/
 
 # Misc
 *.tsbuildinfo
