@@ -80,6 +80,6 @@ describe('AddServiceForm', () => {
     
     expect(screen.getByDisplayValue('Completed')).toBeInTheDocument()
     expect(screen.getByText('In Progress')).toBeInTheDocument()
-    expect(screen.getByText('Pending')).toBeInTheDocument()
+    expect(screen.getByText('Scheduled')).toBeInTheDocument()
   })
 })
